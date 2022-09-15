@@ -1,0 +1,8 @@
+{
+  "name": "geekSearch",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "id": "a873bfba"
+}
