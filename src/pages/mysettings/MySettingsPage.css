@@ -1,0 +1,13 @@
+.MySetApp ion-app ion-img {
+    border-radius: 33px;
+}
+
+.MySetApp .MyProfileImg {
+    border-radius: 130px;
+    width: 50vw;
+    height: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8vh;
+    border: 1px solid black;
+}

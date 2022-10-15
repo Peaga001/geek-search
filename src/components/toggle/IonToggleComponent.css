@@ -1,0 +1,8 @@
+.IonToggleItem {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.IonToggleItem ion-toggle {
+  float: right;
+}

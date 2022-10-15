@@ -1,0 +1,15 @@
+.LogoutApp ion-grid ion-card {
+    height: 30vh;
+    padding: 10px;
+    border-radius: 23px;
+    border-top: 5px solid var(--ion-color-primary);
+    border-right: 5px solid var(--ion-color-primary);
+    border-bottom: 5px solid var(--ion-color-primary);
+    margin-top: 20vh;
+}
+
+.LogoutApp .TitleLogout {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 5vh;
+}

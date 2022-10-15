@@ -1,0 +1,28 @@
+.AboutApp ion-grid {
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.AboutApp .rowCardPrimary {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+.rowCardPrimary ion-col {
+    margin-top: 3vh;
+}
+
+.AboutApp ion-card {
+    width: 100%;
+    margin: 0;
+}
+
+.AboutApp ion-text {
+    text-align: justify;
+    font-size: 12px;
+}
+
+.rowDescriptionDevelopers {
+    margin-top: 3vh;
+}

@@ -1,0 +1,63 @@
+.StoreApp ion-toolbar ion-img {
+    width: 60vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.StoreApp ion-button {
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+    --border-radius: 50px;
+}
+
+.StoreApp ion-grid {
+    padding: 15px;
+    height: 100%;
+    margin-bottom: auto;
+    margin-top: 3vh;
+
+}
+
+.StoreApp ion-row {
+    width: 100vw;
+    height: 20vh;
+}
+
+.StoreApp ion-col {
+    max-width: 30%;
+    min-width: 30%;
+    margin-bottom: 10vh;
+    margin-top: 2vh;
+}
+
+.StoreApp ion-card {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.StoreApp ion-card ion-img {
+    width: 100%;
+    height: 100%;
+}
+
+.StoreApp ion-text {
+    font-size:12px;
+}
+
+.titleSession {
+    font-size: 25px !important;
+    margin-left: 3px;
+}
+
+.IonGridSearchBar {
+    height: 20vw !important;
+}
+

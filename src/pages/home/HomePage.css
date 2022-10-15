@@ -1,0 +1,26 @@
+.HomeApp ion-searchbar {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+.HomeApp ion-accordion {
+    margin: 0 auto;
+}
+
+.HomeApp ion-accordion.accordion-expanding,
+.HomeApp ion-accordion.accordion-expanded {
+    width: calc(100% - 32px);
+    margin: 16px auto;
+}
+
+.HomeApp ion-accordion.accordion-collapsing ion-item[slot="header"],
+.HomeApp ion-accordion.accordion-collapsed ion-item[slot="header"] {
+    --background: var(--ion-color-primary);
+    --color: var(--ion-color-primary-contrast);
+}
+
+.HomeApp ion-accordion.accordion-expanding ion-item[slot="header"],
+.HomeApp ion-accordion.accordion-expanded ion-item[slot="header"] {
+    --background: var(--ion-color-secondary);
+    --color: var(--ion-color-secondary-contrast);
+}

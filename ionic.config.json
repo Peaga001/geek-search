@@ -1,8 +1,12 @@
 {
   "name": "geekSearch",
+  "proxies": [{
+    "proxyUrl": "http://localhost:8000/",
+    "path": "/api",
+    "secure": false
+  }],
   "integrations": {
     "capacitor": {}
   },
-  "type": "react",
-  "id": "a873bfba"
+  "type": "react"
 }
