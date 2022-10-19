@@ -18,6 +18,7 @@ import Themes from '../../theme/Theme'
 import './SignUpPage.css'
 import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
+import { UserClientAPI, UserProps, IResponse } from '../../services/UserClientAPI';
 
 /*MockData*/
 const logoProps = {
@@ -39,29 +40,31 @@ const SignUpPage:React.FC = () => {
 
   const handleSignUp = () => {
 
-    api.post("/user/", {
+    const userClientApi = new UserClientAPI
+
+    const dataUser: UserProps = {
       name: name,
       email: email,
-      password: password,
-    })
-    .then((response) => {
-
-      const valid = response.data.valid
-
-      if(valid){
-        history.push("Home")
-      }
-      else{
+      password: password
+    }
+    
+    const result:IResponse = userClientApi.create(dataUser)
+    
+    if(result.valid){
+      history.push("Home")
+    }
+    else{
+      if(result.error){
+        alertError("Erro ao conectar com o banco de dados, procure um administrador!")
+      }else{
         alertError({
           header: 'Por favor preencha todos os campos!',
           buttons: ['OK'],
         })
       }
-    })
-    .catch((err) => {
-      alertError("Erro ao conectar com o banco de dados, procure um administrador!")
-    });
+    }
   }
+
 
   return (
     <IonApp className='SignUpApp'>
@@ -90,7 +93,12 @@ const SignUpPage:React.FC = () => {
           </IonItem>
         </IonList>
 
-        <IonButton fill='solid' expand='block' color={Themes.primaryButtonColor}>
+        <IonButton 
+          fill='solid' 
+          expand='block' 
+          color={Themes.primaryButtonColor}
+          onClick={handleSignUp}
+        >
           Sign Up
         </IonButton>
 

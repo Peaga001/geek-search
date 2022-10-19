@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
-
-import { useHistory } from "react-router-dom";
+import React from 'react'
 
 import { 
     IonGrid,
@@ -10,17 +8,16 @@ import {
 } from '@ionic/react';
 
 import { CardStoreComponent } from '../card/CardStoreComponent';
-import StoreDetails from '../../pages/store/StoreDetails';
-import { Link, Redirect, Route } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
-interface DataSessionProps {
+export interface DataSessionProps {
   url:string
   description:string
   price:number
 }
 
-interface SessionGridProps {
+export interface SessionGridProps {
   sessionTitle:string
   dataSession:Array<DataSessionProps>
 }

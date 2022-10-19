@@ -1,9 +1,14 @@
 import { useIonAlert } from "@ionic/react";
-import axios from "axios";
+import axios, { Axios } from "axios";
 import { useHistory } from "react-router";
 
-const api = axios.create({
-    baseURL: "http://localhost:8000",
-})
+export class ClientAPI {
 
-export default api
+    urlBase:string = ''
+
+    api = axios.create({
+        baseURL: this.urlBase,
+    })
+}
+
+export default ClientAPI

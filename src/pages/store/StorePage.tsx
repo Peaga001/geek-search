@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { 
   IonContent,
   IonHeader, 
@@ -9,6 +9,7 @@ import {
   IonMenuButton,
   IonSearchbar,
   IonGrid,
+  useIonAlert,
 } from '@ionic/react';
 
 /*Styles*/
@@ -17,85 +18,32 @@ import Themes from '../../theme/Theme'
 
 /*Components*/
 import { SessionGrid } from '../../components/grid/SessionGridComponent';
+import api from '../../services/api';
 
-/*MockData*/
-const MockDataStore = [
-  {
-    session:'Livros',
-    dataSession:[
-      {
-        url:'/assets/img/Logo.png',
-        description:'Descrição livro 1',
-        price:5.0
-      },
-      {
-        url:'/assets/img/Logo.png',
-        description:'Descrição livro 2',
-        price:7.0
-      },
-      {
-        url:'/assets/img/Logo.png',
-        description:'Descrição livro 3',
-        price:10.0
-      },
-      {
-        url:'/assets/img/Logo.png',
-        description:'Descrição livro 4',
-        price:12.0
-      },
-      {
-        url:'/assets/img/Logo.png',
-        description:'Descrição livro 5',
-        price:5.0
-      },
-      {
-        url:'/assets/img/Logo.png',
-        description:'Descrição livro 6',
-        price:7.0
-      },
-      {
-        url:'/assets/img/Logo.png',
-        description:'Descrição livro 7',
-        price:10.0
-      },
-    
-      {
-        url:'/assets/img/Logo.png',
-        description:'Descrição livro 8',
-        price:12.0
-      }
-    ]
-  },
-
-  {
-    session:'Games',
-    dataSession:[
-      {
-        url:'/assets/img/Logo.png',
-        description:'Games 1',
-        price:9.0
-      },
-      {
-        url:'/assets/img/Logo.png',
-        description:'Games 2',
-        price:8.0
-      },
-      {
-        url:'/assets/img/Logo.png',
-        description:'Games 3',
-        price:12.0
-      },
-    
-      {
-        url:'/assets/img/Logo.png',
-        description:'Games 4',
-        price:5.0
-      }
-    ]
-  }
-]
+/* Interface */
+import { SessionGridProps } from '../../components/grid/SessionGridComponent'  
+import { ProductClientAPI, IResponseGet, ArrayProductProps } from '../../services/ProductClientAPI';
 
 const StorePage:React.FC = () => {
+
+  const[storeData, setStoreData] = useState(Array<ArrayProductProps>)
+  const[alertError] = useIonAlert()
+
+  useEffect(() => {
+
+    const productClientAPI =  new ProductClientAPI
+    const responseData: IResponseGet  = productClientAPI.get() 
+
+
+    if(responseData.valid){
+      setStoreData(responseData.data)
+    }
+    else{
+      alertError("Erro ao conectar com o banco de dados, procure um administrador!")
+    }
+
+  },[])
+
   return (
     <IonApp className='StoreApp'>
       <IonHeader>
@@ -112,9 +60,9 @@ const StorePage:React.FC = () => {
           <IonSearchbar></IonSearchbar>
         </IonGrid>
 
-        {MockDataStore.map((Session,index) => {
+        {storeData.map((Session:SessionGridProps,index) => {
           return (
-            <SessionGrid sessionTitle={Session.session} dataSession={Session.dataSession} key={index}/>
+            <SessionGrid sessionTitle={Session.sessionTitle} dataSession={Session.dataSession} key={index}/>
           )
         })}
         

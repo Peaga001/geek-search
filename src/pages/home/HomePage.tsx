@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { 
     IonButtons,
     IonContent,
@@ -12,7 +12,8 @@ import {
     IonItem, 
     IonLabel,
     IonApp, 
-    IonGrid
+    IonGrid,
+    useIonAlert
 } from '@ionic/react';
 
 /*Styles*/
@@ -21,58 +22,33 @@ import './HomePage.css'
 
 /*Components*/
 import { caretDownCircle } from 'ionicons/icons';
+import api from '../../services/api';
 
 /*MockData*/
-const MockDataHome = 
-[
-  {
-    ItemTitle:'Meus livros',
-    position:'first',
-    dataItens:[
-      'Livro 1',
-      'Livro 2',
-      'Livro 3'
-    ]
-  },
-  {
-    ItemTitle:'Meus Games',
-    position:'second',
-    dataItens:[
-      'Game 1',
-      'Game 2',
-      'Game 3'
-    ]
-  },
-  {
-    ItemTitle:'Meus Quadrinhos',
-    position:'third',
-    dataItens:[
-      'Quadrinhos 1',
-      'Quadrinhos 2',
-      'Quadrinhos 3'
-    ]
-  },
-  {
-    ItemTitle:'Meus Jogos de Tabuleiro',
-    position:'fourth',
-    dataItens:[
-      'Jogos 1',
-      'Jogos 2',
-      'Jogos 3'
-    ]
-  },
-  {
-    ItemTitle:'Meus RPGs',
-    position:'fifth',
-    dataItens:[
-      'RPG 1',
-      'RPG 2',
-      'RPG 3'
-    ]
-  },
-]
+
 
 const HomePage:React.FC = () => {
+
+  const [dataHome, setDataHome] = useState([])
+  const [alertError] = useIonAlert()
+
+  useEffect(() => {
+
+    api.get("/home/")
+    .then((response) => {
+
+      const success = response.data.success
+
+      if(success){
+        setDataHome(response.data.dados)
+      }
+    })
+    .catch((err) => {
+      alertError("Erro ao conectar com o banco de dados, procure um administrador!")
+    })
+
+  },[])
+
   return (
     <IonApp className='HomeApp'>
       <IonHeader>
@@ -92,9 +68,9 @@ const HomePage:React.FC = () => {
   
         <IonAccordionGroup expand='inset'>
 
-        {MockDataHome.map((GroupItem,indexGroup) => {
+        {dataHome.map((GroupItem:DataProps,indexGroup:number) => {
             return (
-              <IonAccordion value={GroupItem.position} key={indexGroup} toggleIcon={caretDownCircle} toggleIconSlot="start">
+              <IonAccordion key={indexGroup} toggleIcon={caretDownCircle} toggleIconSlot="start">
                   <IonItem slot="header" color={Themes.menuColor}>
                       <IonLabel>{GroupItem.ItemTitle}</IonLabel>
                   </IonItem>

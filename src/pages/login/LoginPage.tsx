@@ -20,7 +20,7 @@ import Themes from '../../theme/Theme'
 import './LoginPage.css'
 
 /* Services */
-import api from '../../services/api';
+import { UserClientAPI, IResponse, UserProps } from '../../services/UserClientAPI';
 
 /*MockData*/
 const logoProps = {
@@ -43,27 +43,29 @@ const LoginPage:React.FC = () => {
 
   const handleLogin = () => {
 
-    api.post("/user/", {
+    const userClientApi = new UserClientAPI
+
+    const dataUser: UserProps = {
+      name:null,
       email: email,
-      password: password,
-    })
-    .then((response) => {
-
-      const valid = response.data.valid
-
-      if(valid){
-        history.push("Home")
-      }
-      else{
+      password: password
+    }
+    
+    const result:IResponse = userClientApi.login(dataUser)
+    
+    if(result.valid){
+      history.push("Home")
+    }
+    else{
+      if(result.error){
+        alertError("Erro ao conectar com o banco de dados, procure um administrador!")
+      }else{
         alertError({
-          header: 'Login e (ou) senha inválido(s)!',
+          header: 'Por favor preencha todos os campos!',
           buttons: ['OK'],
         })
       }
-    })
-    .catch((err) => {
-      alertError("Erro ao conectar com o banco de dados, procure um administrador!")
-    });
+    }
   }
 
   return (
