@@ -18,19 +18,19 @@ export interface DataSessionProps {
 }
 
 export interface SessionGridProps {
-  sessionTitle:string
+  session:string
   dataSession:Array<DataSessionProps>
 }
 
 
-export const SessionGrid: React.FC<SessionGridProps> = ({sessionTitle, dataSession}) => {
+export const SessionGrid: React.FC<SessionGridProps> = ({session, dataSession}) => {
   return (
 
     <>
       <IonGrid>
         <IonText className='titleSession'>
           <strong>
-            {sessionTitle}
+            {session}
           </strong><br></br>
         </IonText>
 

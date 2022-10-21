@@ -1,6 +1,6 @@
 import { ClientAPI } from "./api"
 
-interface HomeDataProps {
+export interface HomeDataProps {
     ItemTitle: string,
     dataItens: string[]
 }
@@ -19,6 +19,44 @@ export interface IResponse {
 export interface UserData {
     data:HomeDataProps
 }
+
+const MockDataHome = 
+[
+    
+    {
+        ItemTitle:'Meus Livros',
+        dataItens:[
+            'RPG 1',
+            'RPG 2',
+            'RPG 3'
+        ]
+    },
+    {
+        ItemTitle:'Meus Jogos',
+        dataItens:[
+            'RPG 1',
+            'RPG 2',
+            'RPG 3'
+        ]
+    },
+    {
+        ItemTitle:'Meus RPGs',
+        dataItens:[
+            'RPG 1',
+            'RPG 2',
+            'RPG 3'
+        ]
+    },
+    {
+        ItemTitle:'Meus RPGs',
+        dataItens:[
+            'RPG 1',
+            'RPG 2',
+            'RPG 3'
+        ]
+    }
+
+]
   
 class UserClientAPI extends ClientAPI {
 
@@ -27,16 +65,27 @@ class UserClientAPI extends ClientAPI {
 
     get = (id: number) => {
 
-        
+        /*const dataResponse = {
+            valid: false,
+            data: [
+                <HomeDataProps>{}
+            ]
+        }*/
+
+        const dataResponse = {
+            valid: true,
+            data: MockDataHome
+        }
 
         this.api.post(this.baseURL+'/get', {
             userId: id
         })
         .then((response) => {
-            dataResponse.valid = response.data.created
+            dataResponse.valid = response.data.valid
+            dataResponse.data = response.data.dados
         })
         .catch((err) => {
-            dataResponse.error = true
+            dataResponse.valid = false
         })
 
         return dataResponse

@@ -22,30 +22,27 @@ import './HomePage.css'
 
 /*Components*/
 import { caretDownCircle } from 'ionicons/icons';
-import api from '../../services/api';
+import { UserClientAPI, HomeDataProps } from '../../services/UserClientAPI';
 
 /*MockData*/
 
 
 const HomePage:React.FC = () => {
 
-  const [dataHome, setDataHome] = useState([])
+  const [dataHome, setDataHome] = useState(Array<HomeDataProps>)
   const [alertError] = useIonAlert()
+  const userClientApi = new UserClientAPI
 
   useEffect(() => {
-
-    api.get("/home/")
-    .then((response) => {
-
-      const success = response.data.success
-
-      if(success){
-        setDataHome(response.data.dados)
-      }
-    })
-    .catch((err) => {
+      
+    const data = userClientApi.get(0)
+    
+    if(data.valid){
+      setDataHome(data.data)
+    }
+    else{
       alertError("Erro ao conectar com o banco de dados, procure um administrador!")
-    })
+    }
 
   },[])
 
@@ -68,7 +65,7 @@ const HomePage:React.FC = () => {
   
         <IonAccordionGroup expand='inset'>
 
-        {dataHome.map((GroupItem:DataProps,indexGroup:number) => {
+        {dataHome.map((GroupItem:HomeDataProps,indexGroup) => {
             return (
               <IonAccordion key={indexGroup} toggleIcon={caretDownCircle} toggleIconSlot="start">
                   <IonItem slot="header" color={Themes.menuColor}>

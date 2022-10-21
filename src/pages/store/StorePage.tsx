@@ -18,11 +18,13 @@ import Themes from '../../theme/Theme'
 
 /*Components*/
 import { SessionGrid } from '../../components/grid/SessionGridComponent';
-import api from '../../services/api';
+
+/* Services */
+import { ProductClientAPI } from '../../services/ProductClientAPI';
 
 /* Interface */
 import { SessionGridProps } from '../../components/grid/SessionGridComponent'  
-import { ProductClientAPI, IResponseGet, ArrayProductProps } from '../../services/ProductClientAPI';
+import { IResponseGet, ArrayProductProps } from '../../services/ProductClientAPI';
 
 const StorePage:React.FC = () => {
 
@@ -62,7 +64,7 @@ const StorePage:React.FC = () => {
 
         {storeData.map((Session:SessionGridProps,index) => {
           return (
-            <SessionGrid sessionTitle={Session.sessionTitle} dataSession={Session.dataSession} key={index}/>
+            <SessionGrid session={Session.session} dataSession={Session.dataSession} key={index}/>
           )
         })}
         
